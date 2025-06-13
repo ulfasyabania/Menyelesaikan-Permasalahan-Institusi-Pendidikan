@@ -38,11 +38,10 @@ Proyek ini mencakup seluruh tahapan utama dalam siklus data science, yaitu:
 
 ## Persiapan
 
-- **Sumber Data:**
-  - Data asli diperoleh dari UCI Machine Learning Repository:  
-    [Predict Students Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)
-  - Data yang digunakan dalam proyek ini disimpan di repositori Github:  
-    [Data CSV](https://raw.githubusercontent.com/ulfasyabania/Menyelesaikan-Permasalahan-Institusi-Pendidikan/refs/heads/main/data.csv)
+**Sumber Data:**  
+- **Asal Data:** Data diambil dari [UCI Machine Learning Repository – Predict Students Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)  
+- **Data yang Digunakan:** Dataset disimpan di repositori GitHub dan dapat diakses melalui:  
+  [data.csv](https://raw.githubusercontent.com/ulfasyabania/Menyelesaikan-Permasalahan-Institusi-Pendidikan/refs/heads/main/data.csv)
 
 - **Setup Environment:**
   - **Bahasa Pemrograman:** Python
@@ -50,6 +49,26 @@ Proyek ini mencakup seluruh tahapan utama dalam siklus data science, yaitu:
   - **Tools Prototyping UI:** Streamlit untuk membangun sistem interaktif
   - **Dashboard:** (Jika menggunakan Metabase, Tableau Public, atau Looker Studio)
 
+- **Data Understanding**
+
+  **Preview Data & Struktur Dataset:**  
+  - Dataset memiliki **4.424** baris dan **37** kolom.  
+  - Tampilan 5 baris pertama (menggunakan `df.head()`) menunjukkan contoh nilai di setiap kolom, misalnya:
+  - **Marital status, Application mode, Application order, Course**: Menunjukkan angka kode, misalnya nilai _Course_ berkisar antara 171 sampai 9991.
+  - **Target**: Berisi label seperti "Dropout" dan "Graduate".
+  
+  **Informasi Struktur & Kualitas Data:**  
+  - Fungsi `df.info()` mengonfirmasi bahwa setiap kolom memiliki **4.424** nilai non-null, yang berarti tidak ada missing value.  
+  - Mayoritas kolom adalah numerik (29 kolom int64, 7 kolom float64) dan hanya kolom *Target* masih berupa string.  
+  - Hal ini memungkinkan kita melakukan transformasi (misalnya, scaling dan encoding) dengan mudah tanpa perlu menangani missing value.
+
+  **Insight Utama:**  
+  1. **Integritas Data:** Data sudah lengkap (tidak ada missing value) dan siap untuk analisis lanjutan.  
+  2. **Keragaman Fitur:** Data mengandung fitur demografis, pencatatan aplikasi, performa akademik (termasuk nilai, SKS, evaluasi) dan indikator ekonomi makro. Kombinasi fitur ini memberikan basis yang baik untuk analisis prediktif.  
+  3. **Perhatian Khusus:**  
+   - Kolom _Course_ memiliki penyebaran nilai yang sangat lebar (misalnya, minimum 33 dan maksimum 9991) sehingga perlu pengecekan lebih lanjut untuk outlier.  
+   - Kolom *Target* akan di-encode ke format numerik (1 untuk Dropout dan 0 untuk Graduate).
+  
 ---
 
 ## Business Dashboard
