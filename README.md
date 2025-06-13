@@ -51,16 +51,16 @@ Proyek ini mencakup seluruh tahapan utama dalam siklus data science, yaitu:
 
 - **Data Understanding**
 
-  **Preview Data & Struktur Dataset:**  
-  - Dataset memiliki **4.424** baris dan **37** kolom.  
-  - Tampilan 5 baris pertama (menggunakan `df.head()`) menunjukkan contoh nilai di setiap kolom, misalnya:
-  - **Marital status, Application mode, Application order, Course**: Menunjukkan angka kode, misalnya nilai _Course_ berkisar antara 171 sampai 9991.
-  - **Target**: Berisi label seperti "Dropout" dan "Graduate".
-  
-  **Informasi Struktur & Kualitas Data:**  
-  - Fungsi `df.info()` mengonfirmasi bahwa setiap kolom memiliki **4.424** nilai non-null, yang berarti tidak ada missing value.  
-  - Mayoritas kolom adalah numerik (29 kolom int64, 7 kolom float64) dan hanya kolom *Target* masih berupa string.  
-  - Hal ini memungkinkan kita melakukan transformasi (misalnya, scaling dan encoding) dengan mudah tanpa perlu menangani missing value.
+  **Preview Data (df.head()):**  
+  - Tampilan 5 baris pertama menunjukkan bahwa dataset memiliki 37 kolom, yang mencakup informasi demografis dan   akademik. Contohnya, kolom *Marital status*, *Application mode*, dan *Application order* menyajikan nilai numerik sebagai kode pengidentifikasi.  
+  - Kolom *Course* menampilkan nilai yang sangat bervariasi: sebagian besar nilai berada di kisaran yang tinggi (misalnya, 9070, 9773), tetapi terdapat nilai sangat rendah (misalnya, 171) yang perlu dievaluasi lebih lanjut sebagai potensi outlier atau kesalahan input.
+  - Kolom *Target* berisi label “Dropout” dan “Graduate”, yang akan digunakan sebagai variabel dependen untuk keperluan klasifikasi.
+  - Setiap baris menampilkan nilai untuk seluruh kolom (tidak ada missing value pada preview), sehingga integritas awal dataset terjaga.
+
+  **Informasi Struktur Dataset:**  
+  - Dataset terdiri dari 4.424 baris dan 37 kolom dengan tiap kolom memiliki 4.424 nilai non-null.  
+  - Mayoritas kolom berisi data numerik (int64 dan float64), kecuali kolom *Target* yang masih berupa string. Hal ini memudahkan proses scaling dan transformasi, namun *Target* perlu di-encode.
+  - Penggunaan memori sekitar 1.2+ MB menunjukkan dataset ini ringan dan dapat diolah dengan cepat.
 
   **Insight Utama:**  
   1. **Integritas Data:** Data sudah lengkap (tidak ada missing value) dan siap untuk analisis lanjutan.  
@@ -68,7 +68,14 @@ Proyek ini mencakup seluruh tahapan utama dalam siklus data science, yaitu:
   3. **Perhatian Khusus:**  
    - Kolom _Course_ memiliki penyebaran nilai yang sangat lebar (misalnya, minimum 33 dan maksimum 9991) sehingga perlu pengecekan lebih lanjut untuk outlier.  
    - Kolom *Target* akan di-encode ke format numerik (1 untuk Dropout dan 0 untuk Graduate).
-  
+
+- **Hal-hal Penting untuk Langkah Selanjutnya**
+
+  - **Pembersihan Nama Kolom:** Pastikan kolom seperti *Daytime/evening attendance\t* telah dibersihkan dari karakter ekstra (misalnya, tab) untuk menghindari error.
+  - **Encoding Kolom Target:** Karena kolom *Target* masih berupa string (misalnya, "Dropout" dan "Graduate"), lakukan mapping ke format numerik (contoh: "Dropout" → 1, "Graduate" → 0) sehingga sesuai dengan model klasifikasi.
+  - **Deteksi dan Penanganan Outlier:** Analisis lebih lanjut diperlukan untuk kolom *Course*, mengingat adanya nilai yang sangat rendah (misalnya, 171) dibandingkan dengan nilai-nilai lain yang jauh lebih tinggi. Gunakan teknik visualisasi seperti boxplot untuk mengevaluasi distribusi dan menangani outlier.
+  - **Normalisasi Fitur:** Pastikan proses scaling diterapkan untuk menyatukan rentang nilai antar fitur numerik.
+
 ---
 
 ## Business Dashboard
